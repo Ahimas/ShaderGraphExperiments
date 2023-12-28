@@ -6,7 +6,6 @@ public class DebugVertices : MonoBehaviour {
 
 	private void OnDrawGizmos()
 	{
-		
 		_vertices ??= GetComponent<MeshFilter>().sharedMesh.vertices;
 
 		foreach (Vector3 v in _vertices)
