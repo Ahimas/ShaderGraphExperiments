@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 [ExecuteInEditMode]
 public class DebugVertices : MonoBehaviour {
@@ -10,6 +11,12 @@ public class DebugVertices : MonoBehaviour {
 		_vertices ??= GetComponent<MeshFilter>().sharedMesh.vertices;
 
 		foreach (Vector3 v in _vertices)
-            UnityEditor.Handles.Label(transform.position + v, "v: " + v.ToString());
+		{
+			Vector3 vertWorldPosition = transform.position + v;
+			Vector3 cameraViewPosition = SceneView.GetAllSceneCameras()[0].WorldToViewportPoint(vertWorldPosition);
+
+			UnityEditor.Handles.Label(vertWorldPosition,
+				"ObjectSpace: " + v + "\nWorldSpace: " + vertWorldPosition + "\nViewSpace: " + cameraViewPosition);
+		}
 	}
 }
