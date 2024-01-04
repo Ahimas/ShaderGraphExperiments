@@ -1,36 +1,35 @@
-using System.Collections;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public class Explosion : MonoBehaviour
 {
-    [SerializeField] private float radius = 5.0F;
-    [SerializeField] private float power = 10.0F;
-    
     private GameObject _fullObject;
     private Transform _cells;
     private Vector3 _explosionPos;
-
+    private float _delay = 5f;
+    
     private void Start()
     {
         InitVariables();
-        StartCoroutine(ExplosionInSecCor(1f));
     }
 
-    private IEnumerator ExplosionInSecCor(float delay)
+    public void Blow(float power, float upwardsModifier)
     {
-        yield return new WaitForSeconds(delay);
-        
         _fullObject.SetActive(false);
+        _cells.gameObject.SetActive(true);
         
         foreach (Transform child in _cells)
         {
             var rb = child.AddComponent<Rigidbody>();
+            var cl = child.AddComponent<BoxCollider>();
             
-            child.gameObject.SetActive(true);
-            child.AddComponent<BoxCollider>();
-            rb.AddExplosionForce(power, _explosionPos, radius, 0.005f);
+            rb.AddExplosionForce(power, _explosionPos, 0, upwardsModifier);
             rb.useGravity = true;
+
+            Destroy(rb, _delay);
+            Destroy(cl, _delay);
         }
     }
 

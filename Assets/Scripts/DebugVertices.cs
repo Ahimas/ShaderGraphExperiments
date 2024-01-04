@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
 public class DebugVertices : MonoBehaviour {
 
 	private Vector3[] _vertices;
