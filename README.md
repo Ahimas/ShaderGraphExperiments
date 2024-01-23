@@ -18,3 +18,5 @@ https://en.wikipedia.org/wiki/Schlick%27s_approximation
 https://substance3d.adobe.com/tutorials/courses/the-pbr-guide-part-1
 
 https://docs.unity3d.com/Manual/shader-StandardShader.html
+
+https://www.gamedeveloper.com/programming/messing-with-tangent-space
